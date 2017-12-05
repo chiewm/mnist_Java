@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+
 
 public class Main extends JFrame {
 
@@ -71,6 +74,9 @@ public class Main extends JFrame {
         btnGuess.setBounds(630, 12, 60, 27);
 
 
+        int result[] = KNN.classify("7678_758.txt");
+
+
         choosefile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,10 +120,30 @@ public class Main extends JFrame {
                             str += NO;
                         }
                     }
+
                     showArea.append(str + "\n");
                     System.out.println(str);
+                    try{
+                        File f = new File("samples/testDigits/7678_758.txt");
+                        BufferedWriter output = new BufferedWriter(new FileWriter(f,true));
+                        output.append(str+"\n");
+                        output.close();
+                    }
+                    catch (IOException er)
+                    {
+                        er.printStackTrace();
+                    }
+
+
                 }
 
+            }
+        });
+
+        btnGuess.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showConfirmDialog(null, "这是 " + result[1] + " 吗？", "确认对话框", JOptionPane.YES_NO_OPTION);
             }
         });
 
