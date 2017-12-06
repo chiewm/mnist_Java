@@ -1,20 +1,12 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- * Created by jason on 15/9/6.
- */
+
 public class KNN {
 
-    public final static int K = 3;//KNN 中 K 的值
+    private final static int K = 3;//KNN 中 K 的值
 
-    /**
-     * tranfer data to vector
-     * @param fileName
-     * @return
-     */
     public static int[] data2Vec(String fileName){
         int arr[] = new int[32 * 32];
 
@@ -31,14 +23,17 @@ public class KNN {
                 }
             }
 
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        }catch (IOException e){
+
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
 
+
         return arr;
+
     }
+
 
     public static double calDistance(int[] a, int[] b){
         double result = 0.0;
@@ -51,10 +46,11 @@ public class KNN {
         return result;
     }
 
+
     public static int[] classify(String fileName){
         int result[] = new int[2];
 
-        int arr[] = data2Vec("samples/testDigits/"+fileName);
+        int arr[] = data2Vec("samples/test/"+fileName);
 
         result[0] = Integer.parseInt(fileName.split("_")[0]);
 

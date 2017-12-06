@@ -17,17 +17,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+import java.util.Random;
 
 
 public class Main extends JFrame {
 
-    private static final long serialVersionUID = 2764274223326342315L;
+
     private JTextArea showArea;
     private JButton btnOk;
     private JButton btnGuess;
     private JFileChooser jfc;
     private JScrollPane jScrollPane1;
-    private JButton choosefile;
+    private JButton chooseFile;
     private JTextField filepathArea;
 
     private String YES = "1";
@@ -39,6 +40,11 @@ public class Main extends JFrame {
     private File image;
 
     private Color color = new Color(255, 255, 255);
+
+    private Random randNum = new Random();
+    private int rand = randNum.nextInt();
+    private String randStr = String.valueOf(rand);
+
 
     public Main() {
         getContentPane().setLayout(null);
@@ -63,10 +69,10 @@ public class Main extends JFrame {
         getContentPane().add(filepathArea);
         filepathArea.setBounds(80, 12, 200, 27);
 
-        choosefile = new JButton();
-        getContentPane().add(choosefile);
-        choosefile.setText("打开");
-        choosefile.setBounds(278, 12, 60, 27);
+        chooseFile = new JButton();
+        getContentPane().add(chooseFile);
+        chooseFile.setText("打开");
+        chooseFile.setBounds(278, 12, 60, 27);
 
         btnGuess = new JButton();
         getContentPane().add(btnGuess);
@@ -74,10 +80,9 @@ public class Main extends JFrame {
         btnGuess.setBounds(630, 12, 60, 27);
 
 
-        int result[] = KNN.classify("7678_758.txt");
+//        int result[] = KNN.classify("-1596066416_-1596066416.txt");
 
-
-        choosefile.addActionListener(new ActionListener() {
+        chooseFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getContentPane().remove(jlImage);
@@ -123,8 +128,11 @@ public class Main extends JFrame {
 
                     showArea.append(str + "\n");
                     System.out.println(str);
+
+
                     try{
-                        File f = new File("samples/testDigits/7678_758.txt");
+
+                        File f = new File("samples/test/"+randStr+"_"+randStr+".txt");
                         BufferedWriter output = new BufferedWriter(new FileWriter(f,true));
                         output.append(str+"\n");
                         output.close();
@@ -140,9 +148,12 @@ public class Main extends JFrame {
             }
         });
 
+
         btnGuess.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int result[] = KNN.classify(randStr+"_"+randStr+".txt");
+//               int result[] = KNN.classify("594743514_594743514.txt");
                 JOptionPane.showConfirmDialog(null, "这是 " + result[1] + " 吗？", "确认对话框", JOptionPane.YES_NO_OPTION);
             }
         });
