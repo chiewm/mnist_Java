@@ -115,9 +115,9 @@ public class Main extends JFrame {
                     e1.printStackTrace();
                 }
 
-                for (int i = offset / 2; i < bi.getHeight(); i += offset) {
+                for (int i = offset / 2; i < bi.getWidth(); i += offset) {
                     str = "";
-                    for (int j = offset / 2; j < bi.getWidth(); j += offset) {
+                    for (int j = offset / 2; j < bi.getHeight(); j += offset) {
                         int pixel = bi.getRGB(j, i);
                         if (pixel != color.getRGB()) {
                             str += YES;
@@ -155,6 +155,8 @@ public class Main extends JFrame {
                 int result[] = KNN.classify(randStr+"_"+randStr+".txt");
 //               int result[] = KNN.classify("594743514_594743514.txt");
                 JOptionPane.showConfirmDialog(null, "这是 " + result[1] + " 吗？", "确认对话框", JOptionPane.YES_NO_OPTION);
+                rand = randNum.nextInt();
+                randStr = String.valueOf(rand);
             }
         });
 
