@@ -7,7 +7,7 @@ public class KNN {
 
     private final static int K = 3;//KNN 中 K 的值
 
-    public static int[] data2Vec(String fileName){
+    private static int[] data2Vec(String fileName){
         int arr[] = new int[32 * 32];
 
         try{
@@ -35,7 +35,7 @@ public class KNN {
     }
 
 
-    public static double calDistance(int[] a, int[] b){
+    private static double calDistance(int[] a, int[] b){
         double result = 0.0;
         int temp = 0;
         for(int i = 0; i < a.length; i++){
